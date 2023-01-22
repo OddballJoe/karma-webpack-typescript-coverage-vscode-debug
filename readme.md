@@ -7,6 +7,17 @@ This is a sample project that allows:
    - The two experimental launch config options of [vscode-chrome-debug](https://github.com/microsoft/vscode-chrome-debug),
    `breakOnLoad` and `breakOnLoadStrategy`, (see https://github.com/microsoft/vscode-chrome-debug#other-optional-launch-config-fields) appear to allow pausing on a breakpoint on the first run of the tests. Obviously works better if you start the debugging process first and then start the unit tests. The default timeout is 30 seconds, which may not be enough if you're doing a "cold start", meaning that you haven't ran the unit tests in a while.
    - Clicking the "Restart" action of the floating debugging panel will re-trigger execution of the unit tests, similar to saving a file that is referenced in one of the loaded unit test files
+ - Includes recommended VSCode extensions
+
+## Usage
+- Run tests and view coverage:
+   - `npm run test`
+   - Coverage files are output to `coverage/` and can be viewed:
+      - As HTML: right click on HTML file -> "Show Preview", or, from a test file, `Coverage Gutters: Preview Coverage Report`
+      - As gutters: `Coverage Gutters: Display Coverage`
+- Debug tests:
+   - `npm run debug`
+   - Optionally run/debug individual tests from the VSCode testing pane.
 
 
 ## Caveats

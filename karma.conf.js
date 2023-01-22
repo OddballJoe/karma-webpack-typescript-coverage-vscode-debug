@@ -1,6 +1,8 @@
 // Coverage reporting breaks breakpoints
 const debug = process.argv.includes('--debug');
-console.warn(`Debug mode is enabled - code coverage will be disabled`);
+if(debug){
+    console.warn(`Debug mode is enabled - code coverage will be disabled`);
+}
 
 module.exports = (config) => {
     config.set({
@@ -46,8 +48,8 @@ module.exports = (config) => {
         webpackMiddleware: { stats: 'errors-only' },
 
         coverageIstanbulReporter: {
-            dir: '.coverage',
-            reports: ['html', 'text-summary'],
+            dir: 'coverage',
+            reports: ['html', 'text-summary', 'lcovonly'],
             'report-config': {
                 html: { subdir: 'html' }
             },
