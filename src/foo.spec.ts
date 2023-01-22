@@ -1,7 +1,6 @@
-import 'jasmine';
 import should from 'should';
 
-import Foo from '../src/foo';
+import Foo from './foo';
 
 describe('foo', () => {
     it('bar', () => {

@@ -1,6 +1,6 @@
 // Coverage reporting breaks breakpoints
 const debug = process.argv.includes('--debug');
-if(debug){
+if (debug) {
     console.warn(`Debug mode is enabled - code coverage will be disabled`);
 }
 
@@ -10,7 +10,7 @@ module.exports = (config) => {
         customLaunchers: {
             ChromeHeadlessDebug: {
                 base: 'ChromeHeadless',
-                flags: [ '--remote-debugging-port=9333' ],
+                flags: ['--remote-debugging-port=9333'],
             },
         },
 
@@ -18,7 +18,9 @@ module.exports = (config) => {
         reporters: ['progress', ...(debug ? [] : ['coverage-istanbul'])],
 
         files: [
-            { pattern: './test/**/*.ts' }
+            'test/global-variables.js',
+            { pattern: './test/**/*.ts' },
+            { pattern: './src/**/*.spec.ts' },
         ],
 
         preprocessors: {
@@ -26,21 +28,27 @@ module.exports = (config) => {
         },
 
         webpack: {
-            node: { fs: 'empty' },
             devtool: 'inline-source-map',
             mode: 'development',
             resolve: {
-                extensions: ['.js', '.ts', '.tsx', '.json']
+                extensions: ['.js', '.ts', '.tsx', '.json'],
+                fallback: {
+                    "fs": false,
+                    "path": false,
+                    "util": false,
+                    "assert": false,
+                    "os": false,
+                },
             },
             module: {
                 rules: [
-                    {test: /\.tsx?$/, use: [...(debug ? [] : ['coverage-istanbul-loader']), 'ts-loader']}
+                    { test: /\.tsx?$/, use: [...(debug ? [] : ['coverage-istanbul-loader']), 'ts-loader'] }
                 ]
             },
             output: {
                 // Outputs absolute file paths instead of webpack:///path/to/file.extension
                 // This makes stacktrace paths clickable in a shell (e.g. VS Code)
-                devtoolModuleFilenameTemplate: function(info) {
+                devtoolModuleFilenameTemplate: function (info) {
                     return info.absoluteResourcePath;
                 },
             },
@@ -56,7 +64,8 @@ module.exports = (config) => {
             // Don't run coverage on test/
             instrumentation: {
                 excludes: [
-                    '**/test/**'
+                    '**/test/**',
+                    '**/*.spec.ts'
                 ]
             }
         }
