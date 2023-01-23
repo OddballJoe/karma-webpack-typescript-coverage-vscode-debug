@@ -10,14 +10,14 @@ This is a sample project that allows:
  - Includes recommended VSCode extensions
 
 ## Usage
-- Run tests and view coverage:
-   - `npm run test`
+- Run tests and view coverage: `npm run test`
    - Coverage files are output to `coverage/` and can be viewed:
       - As HTML: right click on HTML file -> "Show Preview", or, from a test file, `Coverage Gutters: Preview Coverage Report`
       - As gutters: `Coverage Gutters: Display Coverage`
-- Debug tests:
-   - `npm run debug`
+- Debug tests: `npm run debug`
    - Optionally run/debug individual tests from the VSCode testing pane.
+- Build in production mode: `npm run start`
+- Build in dev mode with hot reloading: `npm run serve`
 
 
 ## Caveats
