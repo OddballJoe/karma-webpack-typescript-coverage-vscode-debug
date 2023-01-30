@@ -1,8 +1,27 @@
 // Coverage reporting breaks breakpoints
-const debug = process.argv.includes("--debug");
-if (debug) {
-  console.warn(`Debug mode is enabled - code coverage will be disabled`);
+const coverage = process.argv.includes("--coverage");
+if (!coverage) {
+  console.warn(`--coverage not specified: code coverage will be disabled`);
 }
+
+const webpackConfig = require("./webpack.config.js");
+webpackConfig.entry = undefined;
+webpackConfig.module.rules = [
+  {
+    test: /\.tsx?$/,
+    use: [...(coverage ? ["coverage-istanbul-loader"] : []), "ts-loader"],
+  },
+];
+webpackConfig.output = {
+  // Outputs absolute file paths instead of webpack:///path/to/file.extension
+  // This makes stacktrace paths clickable in a shell (e.g. VS Code)
+  devtoolModuleFilenameTemplate: function (info) {
+    return info.absoluteResourcePath;
+  },
+};
+
+// Bugfix for Webpack 5
+webpackConfig.optimization = { splitChunks: false };
 
 module.exports = (config) => {
   config.set({
@@ -13,9 +32,8 @@ module.exports = (config) => {
         flags: ["--remote-debugging-port=9333"],
       },
     },
-
-    frameworks: ["jasmine"],
-    reporters: ["progress", ...(debug ? [] : ["coverage-istanbul"])],
+    frameworks: ["jasmine", "webpack"],
+    reporters: ["progress", ...(coverage ? ["coverage-istanbul"] : [])],
 
     files: [
       "test/global-variables.js",
@@ -44,7 +62,10 @@ module.exports = (config) => {
         rules: [
           {
             test: /\.tsx?$/,
-            use: [...(debug ? [] : ["coverage-istanbul-loader"]), "ts-loader"],
+            use: [
+              ...(coverage ? ["coverage-istanbul-loader"] : []),
+              "ts-loader",
+            ],
           },
         ],
       },

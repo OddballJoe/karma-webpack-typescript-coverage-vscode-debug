@@ -7,7 +7,7 @@
     "start": "webpack --mode production",
     "serve": "webpack serve",
     "test": "karma start",
-    "debug": "karma start --debug"
+    "coverage": "karma start --coverage"
   },
   "keywords": [],
   "author": "",
