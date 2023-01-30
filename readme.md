@@ -12,11 +12,11 @@ This is a sample project that allows:
 
 ## Usage
 
-- Run tests and view coverage: `npm run test`
+- Run tests and view coverage: `npm run coverage`
   - Coverage files are output to `coverage/` and can be viewed:
     - As HTML: right click on HTML file -> "Show Preview", or, from a test file, `Coverage Gutters: Preview Coverage Report`
     - As gutters: `Coverage Gutters: Display Coverage`
-- Debug tests: `npm run debug`
+- Test and debug tests: `npm test`
   - Optionally run/debug individual tests from the VSCode testing pane.
 - Build in production mode: `npm run start`
 - Build in dev mode with hot reloading: `npm run serve`
@@ -24,6 +24,6 @@ This is a sample project that allows:
 ## Caveats
 
 - Code coverage may cause problems with breakpoint mappings (e.g. setting a breakpoint on line 3 might actually pause the execution on like 2)
-  - Use `npm run debug` when intending to debug the unit tets.
-  - Use `npm run test` when intending to generally execute the unit tests and measure code coverage
+  - Use `npm run test` when intending to debug the unit tets.
+  - Use `npm run coverage` when intending to generally execute the unit tests and measure code coverage
     - You may still set breakpoints and try debugging the unit tests but the experience may be degraded as explained above
