@@ -1,9 +1,9 @@
-import should from 'should';
+import should from "should";
 
-import Foo from '../src/foo';
+import Foo from "../src/foo";
 
-describe('foo', () => {
-    it('bar', () => {
-        should.equal(new Foo('bar').name, 'bar');
-    });
+describe("foo", () => {
+  it("bar", () => {
+    should.equal(new Foo("bar").name, "bar");
+  });
 });

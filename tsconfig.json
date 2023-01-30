@@ -1,6 +1,6 @@
 {
-    "compilerOptions": {
-        "sourceMap": true,
-        "esModuleInterop": true,
-    }
+  "compilerOptions": {
+    "sourceMap": true,
+    "esModuleInterop": true
+  }
 }
